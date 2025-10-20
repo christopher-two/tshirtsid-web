@@ -9,7 +9,7 @@ export const getStripe = () => {
     if (publicKey) {
       stripePromise = loadStripe(publicKey);
     } else {
-        console.warn("Stripe publishable key is not set. Please set NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY environment variable.");
+        console.warn("La clave publicable de Stripe no está configurada. Por favor, establece la variable de entorno NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY.");
         stripePromise = Promise.resolve(null);
     }
   }

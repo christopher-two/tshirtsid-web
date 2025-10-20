@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { ShoppingBag } from "lucide-react";
-import { loadStripe } from '@stripe/stripe-js';
+import { createCheckoutSession } from "@/app/actions/stripe";
 import { getStripe } from "@/lib/stripe-client";
+import { useToast } from "@/hooks/use-toast";
 
 export function CartView() {
   const { cartItems } = useCart();
+  const { toast } = useToast();
 
   if (cartItems.length === 0) {
     return (
@@ -31,8 +33,30 @@ export function CartView() {
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handleCheckout = async () => {
-    // This will be implemented in the next step
-    alert("Checkout con Stripe no implementado aún.");
+    try {
+      const { sessionId } = await createCheckoutSession(cartItems);
+      const stripe = await getStripe();
+      if (!stripe) {
+        throw new Error("Stripe.js no se ha cargado.");
+      }
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+      
+      if (error) {
+        console.error("Error al redirigir a Stripe:", error);
+        toast({
+          title: "Error de Pago",
+          description: error.message || "Hubo un problema al redirigir a la página de pago.",
+          variant: "destructive",
+        });
+      }
+    } catch (err: any) {
+      console.error("Error al crear la sesión de checkout:", err);
+       toast({
+        title: "Error del Servidor",
+        description: err.message || "No se pudo iniciar el proceso de pago. Por favor, inténtalo de nuevo.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
