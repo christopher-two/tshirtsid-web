@@ -55,7 +55,10 @@ export function Footer() {
           </p>
           <div className="flex items-center space-x-4 order-1 sm:order-2">
             <p className="text-sm text-gray-400 flex items-center">
-              Desarrollado con <Heart className="w-4 h-4 mx-1 text-red-500 fill-current" /> por AI
+              Desarrollado con <Heart className="w-4 h-4 mx-1 text-red-500 fill-current" /> por&nbsp;
+              <Link href="https://www.christopher.com.mx" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
+                ChristopherTwo
+              </Link>
             </p>
             <div className="flex space-x-4">
                <Link href="#" className="text-gray-400 hover:text-white">
