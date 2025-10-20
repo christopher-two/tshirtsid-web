@@ -10,10 +10,12 @@ import { ShoppingBag } from "lucide-react";
 import { createCheckoutSession } from "@/app/actions/stripe";
 import { getStripe } from "@/lib/stripe-client";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 export function CartView() {
   const { cartItems } = useCart();
   const { toast } = useToast();
+  const router = useRouter();
 
   if (cartItems.length === 0) {
     return (
@@ -39,13 +41,19 @@ export function CartView() {
       if (!stripe) {
         throw new Error("Stripe.js no se ha cargado.");
       }
-      const { error } = await stripe.redirectToCheckout({ sessionId });
       
-      if (error) {
-        console.error("Error al redirigir a Stripe:", error);
+      // The `redirectToCheckout` function will automatically navigate the user
+      // to the Stripe Checkout page. It does not resolve if the navigation
+      // is successful. It only resolves with an error if it fails.
+      const result = await stripe.redirectToCheckout({ sessionId });
+      
+      if (result.error) {
+        // This point will only be reached if there is an immediate error during
+        // the redirection process.
+        console.error("Error al redirigir a Stripe:", result.error);
         toast({
           title: "Error de Pago",
-          description: error.message || "Hubo un problema al redirigir a la página de pago.",
+          description: result.error.message || "Hubo un problema al redirigir a la página de pago.",
           variant: "destructive",
         });
       }
