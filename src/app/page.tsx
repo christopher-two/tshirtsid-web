@@ -1,5 +1,3 @@
-import { products } from '@/lib/products';
-import { ProductView } from '@/components/products/ProductView';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -20,17 +18,9 @@ export default function Home() {
             Explora los últimos diseños y encuentra tu nueva camiseta favorita. Innovación y estilo en cada hilo.
           </p>
           <Button asChild size="lg" className="mt-8">
-            <Link href="#products">Ver Colección</Link>
+            <Link href="/collection">Ver Colección</Link>
           </Button>
         </div>
-      </section>
-
-      <section id="products">
-        <h2 className="text-3xl font-bold tracking-tight mb-4 font-headline">Nuestra Colección</h2>
-        <p className="text-muted-foreground mb-8">
-          Descubre tu próxima camiseta favorita de nuestra selección curada.
-        </p>
-        <ProductView allProducts={products} />
       </section>
     </div>
   );

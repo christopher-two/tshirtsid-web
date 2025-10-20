@@ -32,7 +32,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     <div className="space-y-8">
       <div>
         <Button asChild variant="ghost" className="-ml-4">
-          <Link href="/">
+          <Link href="/collection">
             <ChevronLeft className="mr-2 h-4 w-4" />
             Back to all products
           </Link>
