@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { ShoppingBag } from "lucide-react";
+import { loadStripe } from '@stripe/stripe-js';
+import { getStripe } from "@/lib/stripe-client";
 
 export function CartView() {
   const { cartItems } = useCart();
@@ -27,6 +29,11 @@ export function CartView() {
   }
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handleCheckout = async () => {
+    // This will be implemented in the next step
+    alert("Checkout con Stripe no implementado aún.");
+  };
 
   return (
     <div className="grid lg:grid-cols-3 gap-8">
@@ -56,7 +63,7 @@ export function CartView() {
             </div>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Button className="w-full" size="lg">Proceder al Pago</Button>
+            <Button className="w-full" size="lg" onClick={handleCheckout}>Proceder al Pago</Button>
             <Button asChild variant="outline" className="w-full">
               <Link href="/">Seguir Comprando</Link>
             </Button>
