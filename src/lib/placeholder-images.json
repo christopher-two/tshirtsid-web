@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "tshirt-geo-abstract",
+      "description": "A black t-shirt with a colorful geometric abstract design.",
+      "imageUrl": "https://images.unsplash.com/photo-1627225793904-a2f900a6e4cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxnZW9tZXRyaWMlMjB0c2hpcnR8ZW58MHx8fHwxNzYwOTc5Njk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "geometric tshirt"
+    },
+    {
+      "id": "tshirt-minimal-wave",
+      "description": "A white t-shirt with a single, elegant black wave line.",
+      "imageUrl": "https://images.unsplash.com/photo-1655041448985-f6666cba2d6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtaW5pbWFsaXN0JTIwdHNoaXJ0fGVufDB8fHx8MTc2MDk3OTY5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "minimalist tshirt"
+    },
+    {
+      "id": "tshirt-vintage-logo",
+      "description": "A heather gray t-shirt with a distressed vintage-style logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1661228534862-32b124989b67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx2aW50YWdlJTIwdHNoaXJ0fGVufDB8fHx8MTc2MDk3OTY5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "vintage tshirt"
+    },
+    {
+      "id": "tshirt-botanical",
+      "description": "A forest green t-shirt with a detailed botanical leaf print.",
+      "imageUrl": "https://images.unsplash.com/photo-1579167728798-a1cf3d595960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib3RhbmljYWwlMjBwcmludHxlbnwwfHx8fDE3NjA5Mzk0MTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "botanical print"
+    },
+    {
+      "id": "tshirt-space-explorer",
+      "description": "A navy blue t-shirt featuring a retro astronaut and planets design.",
+      "imageUrl": "https://images.unsplash.com/photo-1760463502136-25a5f9f858ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzcGFjZSUyMHRzaGlydHxlbnwwfHx8fDE3NjA5Nzk2OTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "space tshirt"
+    },
+    {
+      "id": "tshirt-cityscape",
+      "description": "A charcoal t-shirt with a stylized line art of a city skyline at night.",
+      "imageUrl": "https://images.unsplash.com/photo-1759486999968-99fad6ee5f7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjaXR5c2NhcGUlMjB0c2hpcnR8ZW58MHx8fHwxNzYwOTc5Njk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cityscape tshirt"
+    },
+    {
+      "id": "tshirt-striped-classic",
+      "description": "A classic navy and white striped t-shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1590061826933-c84b0891bc03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdHJpcGVkJTIwc2hpcnR8ZW58MHx8fHwxNzYwOTc5Njk2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "striped shirt"
+    },
+    {
+      "id": "tshirt-plain-black",
+      "description": "A high-quality, plain black t-shirt made from premium cotton.",
+      "imageUrl": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxibGFjayUyMHRzaGlydHxlbnwwfHx8fDE3NjA5Nzk2OTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "black tshirt"
+    },
+    {
+      "id": "tshirt-origami-crane",
+      "description": "A light-gray shirt with a simple origami crane graphic.",
+      "imageUrl": "https://picsum.photos/seed/109/600/800",
+      "imageHint": "origami tshirt"
+    }
+  ]
 }
