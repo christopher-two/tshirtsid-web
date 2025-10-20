@@ -1,8 +1,12 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { products } from '@/lib/products';
+import { ProductCard } from '@/components/products/ProductCard';
 
 export default function Home() {
+  const featuredProducts = products.slice(0, 3);
+
   return (
     <div className="space-y-16">
       <section className="relative bg-gray-900 text-white rounded-lg overflow-hidden">
@@ -20,6 +24,25 @@ export default function Home() {
           </p>
           <Button asChild size="lg" className="mt-8">
             <Link href="/collection">Ver Colección</Link>
+          </Button>
+        </div>
+      </section>
+
+      <section>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight font-headline">Productos Destacados</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+            Una selección de nuestros diseños más populares y queridos por la comunidad.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProducts.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        <div className="text-center mt-12">
+          <Button asChild size="lg" variant="outline">
+            <Link href="/collection">Ver todos los productos</Link>
           </Button>
         </div>
       </section>
