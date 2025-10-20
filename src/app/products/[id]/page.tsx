@@ -34,7 +34,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         <Button asChild variant="ghost" className="-ml-4">
           <Link href="/collection">
             <ChevronLeft className="mr-2 h-4 w-4" />
-            Back to all products
+            Volver a todos los productos
           </Link>
         </Button>
       </div>

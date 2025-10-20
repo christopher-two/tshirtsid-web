@@ -15,12 +15,12 @@ export function CartView() {
     return (
       <div className="text-center py-16 border-2 border-dashed rounded-lg">
         <ShoppingBag className="mx-auto h-12 w-12 text-muted-foreground" />
-        <h2 className="mt-4 text-xl font-semibold">Your cart is empty</h2>
+        <h2 className="mt-4 text-xl font-semibold">Tu carrito está vacío</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Looks like you haven't added anything to your cart yet.
+          Parece que aún no has añadido nada a tu carrito.
         </p>
         <Button asChild className="mt-6">
-          <Link href="/">Start Shopping</Link>
+          <Link href="/">Empezar a Comprar</Link>
         </Button>
       </div>
     );
@@ -38,7 +38,7 @@ export function CartView() {
       <div className="lg:col-span-1">
         <Card className="sticky top-24">
           <CardHeader>
-            <CardTitle>Order Summary</CardTitle>
+            <CardTitle>Resumen del Pedido</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-between">
@@ -46,8 +46,8 @@ export function CartView() {
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Shipping</span>
-              <span className="font-medium">Free</span>
+              <span>Envío</span>
+              <span className="font-medium">Gratis</span>
             </div>
             <Separator />
             <div className="flex justify-between font-bold text-lg">
@@ -56,9 +56,9 @@ export function CartView() {
             </div>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Button className="w-full" size="lg">Proceed to Checkout</Button>
+            <Button className="w-full" size="lg">Proceder al Pago</Button>
             <Button asChild variant="outline" className="w-full">
-              <Link href="/">Continue Shopping</Link>
+              <Link href="/">Seguir Comprando</Link>
             </Button>
           </CardFooter>
         </Card>

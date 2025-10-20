@@ -19,7 +19,7 @@ export function AddToCart({ product }: AddToCartProps) {
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      setError('Please select a size.');
+      setError('Por favor, selecciona una talla.');
       return;
     }
     setError(null);
@@ -29,7 +29,7 @@ export function AddToCart({ product }: AddToCartProps) {
   return (
     <div className="space-y-6 pt-4">
       <div>
-        <Label className="text-base font-medium">Size</Label>
+        <Label className="text-base font-medium">Talla</Label>
         <RadioGroup
           value={selectedSize}
           onValueChange={setSelectedSize}
@@ -52,7 +52,7 @@ export function AddToCart({ product }: AddToCartProps) {
       </div>
       <Button size="lg" className="w-full" onClick={handleAddToCart} disabled={!selectedSize}>
         <ShoppingBag className="mr-2 h-5 w-5" />
-        Add to Cart
+        Añadir al Carrito
       </Button>
     </div>
   );

@@ -52,13 +52,13 @@ export function ProductView({ allProducts }: ProductViewProps) {
     <div>
       <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-end">
         <div className="flex items-center gap-2">
-          <label htmlFor="filter-size" className="text-sm font-medium">Filter by size:</label>
+          <label htmlFor="filter-size" className="text-sm font-medium">Filtrar por talla:</label>
           <Select value={filterSize} onValueChange={setFilterSize}>
             <SelectTrigger id="filter-size" className="w-[120px]">
-              <SelectValue placeholder="Size" />
+              <SelectValue placeholder="Talla" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Sizes</SelectItem>
+              <SelectItem value="all">Todas</SelectItem>
               {allSizes.map(size => (
                 <SelectItem key={size} value={size}>{size}</SelectItem>
               ))}
@@ -66,17 +66,17 @@ export function ProductView({ allProducts }: ProductViewProps) {
           </Select>
         </div>
         <div className="flex items-center gap-2">
-          <label htmlFor="sort-by" className="text-sm font-medium">Sort by:</label>
+          <label htmlFor="sort-by" className="text-sm font-medium">Ordenar por:</label>
           <Select value={sortKey} onValueChange={(value) => setSortKey(value as SortKey)}>
             <SelectTrigger id="sort-by" className="w-[180px]">
-              <SelectValue placeholder="Sort" />
+              <SelectValue placeholder="Ordenar" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="default">Default</SelectItem>
-              <SelectItem value="price-asc">Price: Low to High</SelectItem>
-              <SelectItem value="price-desc">Price: High to Low</SelectItem>
-              <SelectItem value="name-asc">Name: A to Z</SelectItem>
-              <SelectItem value="name-desc">Name: Z to A</SelectItem>
+              <SelectItem value="default">Por Defecto</SelectItem>
+              <SelectItem value="price-asc">Precio: Bajo a Alto</SelectItem>
+              <SelectItem value="price-desc">Precio: Alto a Bajo</SelectItem>
+              <SelectItem value="name-asc">Nombre: A a Z</SelectItem>
+              <SelectItem value="name-desc">Nombre: Z a A</SelectItem>
             </SelectContent>
           </Select>
         </div>

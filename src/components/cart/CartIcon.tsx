@@ -31,7 +31,7 @@ export function CartIcon() {
             </Badge>
           )}
         </div>
-        <span className="sr-only">Shopping Cart</span>
+        <span className="sr-only">Carrito de Compras</span>
       </Link>
     </Button>
   );

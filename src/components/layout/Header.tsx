@@ -12,8 +12,8 @@ import { Button } from '../ui/button';
 import { useState } from 'react';
 
 const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/collection', label: 'Collection' },
+    { href: '/', label: 'Inicio' },
+    { href: '/collection', label: 'Colección' },
 ]
 
 export function Header() {
@@ -44,7 +44,7 @@ export function Header() {
                     <SheetTrigger asChild>
                         <Button variant="ghost" size="icon">
                             <Menu className="h-6 w-6" />
-                            <span className="sr-only">Open Menu</span>
+                            <span className="sr-only">Abrir Menú</span>
                         </Button>
                     </SheetTrigger>
                     <SheetContent side="right">

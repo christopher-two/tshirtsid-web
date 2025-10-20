@@ -9,8 +9,8 @@ export function ProductGrid({ products }: ProductGridProps) {
   if (products.length === 0) {
     return (
         <div className="text-center py-16">
-            <h2 className="text-2xl font-semibold mb-2">No Products Found</h2>
-            <p className="text-muted-foreground">Try adjusting your filters.</p>
+            <h2 className="text-2xl font-semibold mb-2">No se encontraron productos</h2>
+            <p className="text-muted-foreground">Intenta ajustar tus filtros.</p>
         </div>
     )
   }

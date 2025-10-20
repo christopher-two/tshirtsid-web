@@ -38,7 +38,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
             <Link href={`/products/${item.id}`} className="font-semibold hover:underline">
               {item.name}
             </Link>
-            <p className="text-sm text-muted-foreground">Size: {item.size}</p>
+            <p className="text-sm text-muted-foreground">Talla: {item.size}</p>
             <p className="text-sm text-muted-foreground">${item.price.toFixed(2)}</p>
           </div>
 
