@@ -9,7 +9,6 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2 text-lg font-semibold font-headline">
-              <Shirt className="h-6 w-6" />
               <span>T-Shirt ID Shop</span>
             </Link>
           </div>
