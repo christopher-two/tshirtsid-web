@@ -42,14 +42,9 @@ export function CartView() {
         throw new Error("Stripe.js no se ha cargado.");
       }
       
-      // The `redirectToCheckout` function will automatically navigate the user
-      // to the Stripe Checkout page. It does not resolve if the navigation
-      // is successful. It only resolves with an error if it fails.
       const result = await stripe.redirectToCheckout({ sessionId });
       
       if (result.error) {
-        // This point will only be reached if there is an immediate error during
-        // the redirection process.
         console.error("Error al redirigir a Stripe:", result.error);
         toast({
           title: "Error de Pago",
