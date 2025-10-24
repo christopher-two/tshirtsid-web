@@ -1,0 +1,197 @@
+{
+  "entities": {
+    "TShirt": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "TShirt",
+      "type": "object",
+      "description": "Represents a T-shirt product in the shop.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the T-shirt."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the t-shirt."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the t-shirt."
+        },
+        "images": {
+          "type": "array",
+          "description": "Array of image URLs for the t-shirt.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "price": {
+          "type": "number",
+          "description": "The price of the t-shirt."
+        },
+        "availableSizes": {
+          "type": "array",
+          "description": "Array of available sizes for the t-shirt.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "images",
+        "price",
+        "availableSizes"
+      ]
+    },
+    "ShoppingCart": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ShoppingCart",
+      "type": "object",
+      "description": "Represents a user's shopping cart.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the shopping cart."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:1 ShoppingCart)"
+        },
+        "items": {
+          "type": "array",
+          "description": "Array of cart items.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "items"
+      ]
+    },
+    "CartItem": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "CartItem",
+      "type": "object",
+      "description": "Represents an item in the shopping cart.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the cart item."
+        },
+        "tshirtId": {
+          "type": "string",
+          "description": "Reference to TShirt. (Relationship: TShirt 1:N CartItem)"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity of the t-shirt in the cart."
+        },
+        "shoppingCartId": {
+          "type": "string",
+          "description": "Reference to ShoppingCart. (Relationship: ShoppingCart 1:N CartItem)"
+        }
+      },
+      "required": [
+        "id",
+        "tshirtId",
+        "quantity",
+        "shoppingCartId"
+      ]
+    },
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "format": "email"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the user."
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "name"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/tshirts/{tshirtId}",
+        "definition": {
+          "entityName": "TShirt",
+          "schema": {
+            "$ref": "#/backend/entities/TShirt"
+          },
+          "description": "Stores all t-shirt products available in the shop.",
+          "params": [
+            {
+              "name": "tshirtId",
+              "description": "Unique identifier for the t-shirt."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/shopping_cart",
+        "definition": {
+          "entityName": "ShoppingCart",
+          "schema": {
+            "$ref": "#/backend/entities/ShoppingCart"
+          },
+          "description": "Stores the user's shopping cart. This is a 1:1 relationship with the User entity.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "Unique identifier for the user.  Authorization is limited to the user identified by request.auth.uid."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/shopping_cart/cart_items/{cartItemId}",
+        "definition": {
+          "entityName": "CartItem",
+          "schema": {
+            "$ref": "#/backend/entities/CartItem"
+          },
+          "description": "Stores individual items within a user's shopping cart. Authorization is limited to the user identified by request.auth.uid.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "Unique identifier for the user."
+            },
+            {
+              "name": "cartItemId",
+              "description": "Unique identifier for the cart item."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to ensure authorization independence, clarity, and scalability for the T-Shirt ID Shop. It leverages path-based ownership for user-specific data (shopping carts) and structural segregation for product data. Authorization independence is achieved by storing shopping cart items as subcollections of the shopping cart. This allows for simple security rules based on `request.auth.uid`.\n\nThe structure supports QAPs (Rules are not Filters) by segregating user-owned data under `/users/{userId}` paths, ensuring that listing operations can be securely scoped to the authenticated user. Additionally, the `tshirts` collection stores all t-shirt products."
+  }
+}
