@@ -9,22 +9,66 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   const featuredProducts = products.slice(0, 3);
 
+  const categories = [
+    {
+      name: 'Mujer',
+      href: '/collection/women',
+      imageSrc: 'https://images.unsplash.com/photo-1572804013427-4d7ca726b65a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      imageHint: 'woman fashion',
+      subImageSrc: 'https://images.unsplash.com/photo-1509395043312-9c1622ed307f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      subImageHint: 'woman portrait',
+    },
+    {
+      name: 'Hombre',
+      href: '/collection/men',
+      imageSrc: 'https://images.unsplash.com/photo-1512303500393-2b2f6f5b2da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      imageHint: 'man fashion',
+      subImageSrc: 'https://images.unsplash.com/photo-1593452506440-78155b5f257e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      subImageHint: 'man portrait',
+    },
+  ];
+
   return (
     <div className="space-y-16">
-      <section className="relative min-h-[60vh] flex items-center justify-center text-foreground border-b-2 border-primary">
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center z-10">
-          <h1 className="text-4xl md:text-7xl font-bold tracking-tighter font-headline uppercase">
-            Estilo que <span className="text-primary">Define</span>
-          </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground">
-            Explora los últimos diseños y encuentra tu nueva camiseta favorita. Innovación y estilo en cada hilo.
-          </p>
-          <Button asChild size="lg" className="mt-8 uppercase font-bold group">
-            <Link href="/collection">
-              Ver Colección
-              <ArrowRight className="transition-transform group-hover:translate-x-2" />
-            </Link>
-          </Button>
+      <section className="min-h-screen -my-8 -mx-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-1 md:grid-rows-[auto_1fr] h-full">
+          <div className="md:col-span-2 grid grid-cols-2 grid-rows-2">
+            
+            {/* Top row */}
+            <div className="relative aspect-square">
+              <Image src="https://images.unsplash.com/photo-1572804013427-4d7ca726b65a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Woman" fill className="object-cover" />
+            </div>
+            <div className="relative aspect-square">
+              <Image src="https://images.unsplash.com/photo-1512303500393-2b2f6f5b2da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Man" fill className="object-cover" />
+            </div>
+
+            {/* Bottom row */}
+            <div className="relative aspect-square group">
+               <Link href="/collection/women">
+                <Image src="https://images.unsplash.com/photo-1509395043312-9c1622ed307f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Mujer" fill className="object-cover group-hover:opacity-75 transition-opacity" />
+                <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
+                  <h2 className="text-5xl md:text-7xl font-black text-white uppercase">Mujer</h2>
+                </div>
+               </Link>
+            </div>
+             <div className="relative aspect-square group">
+               <Link href="/collection/men">
+                <Image src="https://images.unsplash.com/photo-1593452506440-78155b5f257e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Hombre" fill className="object-cover group-hover:opacity-75 transition-opacity" />
+                <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
+                  <h2 className="text-5xl md:text-7xl font-black text-white uppercase">Hombre</h2>
+                </div>
+               </Link>
+            </div>
+          </div>
+
+          <div className="relative md:row-span-2 group">
+             <Link href="/collection/kids">
+              <Image src="https://images.unsplash.com/photo-1513224729462-475246ba1136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Kids" fill className="object-cover h-full group-hover:opacity-75 transition-opacity" />
+              <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
+                <h2 className="text-5xl md:text-7xl font-black text-white uppercase">Kids</h2>
+              </div>
+             </Link>
+          </div>
         </div>
       </section>
 
