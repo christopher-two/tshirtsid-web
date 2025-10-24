@@ -1,6 +1,6 @@
 "use client";
 
-import { useCollection, useFirestore } from '@/firebase';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
 import { ProductView } from '@/components/products/ProductView';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -22,8 +22,12 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   const { category } = params;
   const firestore = useFirestore();
   
-  const productsCollection = collection(firestore, 'tshirts');
-  const productsQuery = query(productsCollection, where('category', '==', category));
+  const productsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    const productsCollection = collection(firestore, 'tshirts');
+    return query(productsCollection, where('category', '==', category));
+  }, [firestore, category]);
+
   const { data: filteredProducts, isLoading } = useCollection<TShirt>(productsQuery);
 
   if (!validCategories.includes(category)) {

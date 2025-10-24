@@ -1,6 +1,6 @@
 "use client";
 
-import { useDoc, useFirestore } from '@/firebase';
+import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -20,7 +20,12 @@ interface ProductPageProps {
 
 export default function ProductPage({ params }: ProductPageProps) {
   const firestore = useFirestore();
-  const productRef = doc(firestore, 'tshirts', params.id);
+  
+  const productRef = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return doc(firestore, 'tshirts', params.id);
+  }, [firestore, params.id]);
+
   const { data: product, isLoading } = useDoc<TShirt>(productRef);
 
   if (isLoading) {

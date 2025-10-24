@@ -1,6 +1,6 @@
 "use client";
 
-import { useCollection, useFirestore } from '@/firebase';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
 import { ProductView } from '@/components/products/ProductView';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -11,7 +11,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function CollectionPage() {
   const firestore = useFirestore();
-  const { data: products, isLoading } = useCollection<TShirt>(collection(firestore, 'tshirts'));
+  
+  const productsCollection = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return collection(firestore, 'tshirts');
+  }, [firestore]);
+
+  const { data: products, isLoading } = useCollection<TShirt>(productsCollection);
 
   return (
     <section id="products">
