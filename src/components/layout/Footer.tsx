@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Twitter, Linkedin, Github, Heart } from "lucide-react";
+import { Instagram, Facebook, Heart } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 
@@ -37,13 +37,10 @@ export function Footer() {
             <h2 className="text-2xl font-bold font-headline uppercase tracking-wider">T-Shirt ID</h2>
              <div className="flex space-x-4 mt-4">
                <Link href="#" className="text-muted-foreground hover:text-primary">
-                 <Twitter className="w-5 h-5" />
+                 <Instagram className="w-5 h-5" />
                </Link>
                <Link href="#" className="text-muted-foreground hover:text-primary">
-                 <Linkedin className="w-5 h-5" />
-               </Link>
-               <Link href="#" className="text-muted-foreground hover:text-primary">
-                 <Github className="w-5 h-5" />
+                 <Facebook className="w-5 h-5" />
                </Link>
             </div>
           </div>
