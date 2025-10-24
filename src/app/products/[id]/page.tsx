@@ -1,4 +1,6 @@
-import { tshirts } from '@/lib/tshirts';
+"use client";
+
+import { useDoc, useFirestore } from '@/firebase';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -6,6 +8,9 @@ import { WhatsAppButton } from '@/components/products/WhatsAppButton';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { doc } from 'firebase/firestore';
+import type { TShirt } from '@/lib/types';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductPageProps {
   params: {
@@ -13,14 +18,35 @@ interface ProductPageProps {
   };
 }
 
-export function generateStaticParams() {
-  return tshirts.map(product => ({
-    id: product.id,
-  }));
-}
-
 export default function ProductPage({ params }: ProductPageProps) {
-  const product = tshirts.find(p => p.id === params.id);
+  const firestore = useFirestore();
+  const productRef = doc(firestore, 'tshirts', params.id);
+  const { data: product, isLoading } = useDoc<TShirt>(productRef);
+
+  if (isLoading) {
+    return (
+       <div className="space-y-8">
+        <div>
+            <Button asChild variant="ghost" className="-ml-4 uppercase">
+              <Link href="/collection">
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                Volver a todos los productos
+              </Link>
+            </Button>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <Skeleton className="aspect-[3/4]"/>
+            <div className="flex flex-col justify-center space-y-4">
+                <Skeleton className="h-10 w-3/4" />
+                <Skeleton className="h-8 w-1/4" />
+                <Skeleton className="h-20 w-full" />
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-12 w-full" />
+            </div>
+        </div>
+    </div>
+    );
+  }
   
   if (!product) {
     notFound();

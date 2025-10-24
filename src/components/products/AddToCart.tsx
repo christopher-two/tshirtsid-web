@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
-import type { Product } from '@/lib/types';
+import type { TShirt } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { ShoppingBag } from 'lucide-react';
 
 interface AddToCartProps {
-  product: Product;
+  product: TShirt;
 }
 
 export function AddToCart({ product }: AddToCartProps) {

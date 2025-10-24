@@ -9,3 +9,10 @@ export interface TShirt {
   imageHint: string;
   category: 'men' | 'women' | 'kids';
 }
+
+export interface Product extends TShirt {}
+
+export interface CartItem extends Product {
+  quantity: number;
+  size: string;
+}
