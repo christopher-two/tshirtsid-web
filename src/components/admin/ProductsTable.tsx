@@ -37,6 +37,8 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { errorEmitter } from "@/firebase/error-emitter";
+import { FirestorePermissionError } from "@/firebase/errors";
 
 
 function DeleteConfirmationDialog({ open, onOpenChange, onConfirm, productName }: { open: boolean, onOpenChange: (open: boolean) => void, onConfirm: () => void, productName: string }) {
@@ -82,24 +84,35 @@ export function ProductsTable() {
     const confirmDelete = async () => {
         if (!productToDelete || !firestore) return;
         
-        try {
-            const productDocRef = doc(firestore, 'tshirts', productToDelete.id);
-            await deleteDoc(productDocRef);
-            toast({
-                title: "Producto Eliminado",
-                description: `La camiseta "${productToDelete.name}" ha sido eliminada.`,
+        const productDocRef = doc(firestore, 'tshirts', productToDelete.id);
+        
+        deleteDoc(productDocRef)
+            .then(() => {
+                toast({
+                    title: "Producto Eliminado",
+                    description: `La camiseta "${productToDelete.name}" ha sido eliminada.`,
+                });
+            })
+            .catch((error) => {
+                console.error("Error al eliminar el producto:", error);
+                
+                const contextualError = new FirestorePermissionError({
+                    path: productDocRef.path,
+                    operation: 'delete',
+                });
+
+                errorEmitter.emit('permission-error', contextualError);
+
+                toast({
+                    title: "Error de Permisos",
+                    description: "No tienes permiso para eliminar este producto.",
+                    variant: "destructive",
+                });
+            })
+            .finally(() => {
+                setIsDeleting(false);
+                setProductToDelete(null);
             });
-        } catch (error) {
-            console.error("Error al eliminar el producto:", error);
-            toast({
-                title: "Error",
-                description: "No se pudo eliminar el producto.",
-                variant: "destructive",
-            });
-        } finally {
-            setIsDeleting(false);
-            setProductToDelete(null);
-        }
     }
 
 

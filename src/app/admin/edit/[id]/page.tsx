@@ -9,6 +9,8 @@ import type { TShirt } from '@/lib/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useState } from 'react';
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 export default function EditProductPage() {
   const firestore = useFirestore();
@@ -30,31 +32,41 @@ export default function EditProductPage() {
     if (!firestore || !product) return;
     setIsSubmitting(true);
     
-    try {
-      const productDocRef = doc(firestore, 'tshirts', product.id);
-      
-      const updatedProductData = {
-          ...data,
-          updatedAt: serverTimestamp(),
-      }
-
-      await updateDoc(productDocRef, updatedProductData);
-
-      toast({
-        title: '¡Producto actualizado!',
-        description: `La camiseta "${data.name}" ha sido actualizada correctamente.`,
-      });
-      router.push('/admin');
-    } catch (error) {
-      console.error('Error al actualizar el producto:', error);
-      toast({
-        title: 'Error',
-        description: 'No se pudo actualizar el producto. Por favor, inténtalo de nuevo.',
-        variant: 'destructive',
-      });
-    } finally {
-        setIsSubmitting(false);
+    const productDocRef = doc(firestore, 'tshirts', product.id);
+    
+    const updatedProductData = {
+        ...data,
+        updatedAt: serverTimestamp(),
     }
+
+    updateDoc(productDocRef, updatedProductData)
+      .then(() => {
+        toast({
+          title: '¡Producto actualizado!',
+          description: `La camiseta "${data.name}" ha sido actualizada correctamente.`,
+        });
+        router.push('/admin');
+      })
+      .catch((error) => {
+        console.error('Error al actualizar el producto:', error);
+        
+        const contextualError = new FirestorePermissionError({
+            path: productDocRef.path,
+            operation: 'update',
+            requestResourceData: updatedProductDatan,
+        });
+
+        errorEmitter.emit('permission-error', contextualError);
+
+        toast({
+          title: 'Error de Permisos',
+          description: 'No tienes permiso para editar este producto.',
+          variant: 'destructive',
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   if (isLoading) {
