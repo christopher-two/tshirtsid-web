@@ -23,21 +23,24 @@ export function Header() {
     <header className="bg-background border-b-2 border-foreground sticky top-0 z-40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
+          
+          <div className="flex-1 flex justify-start">
+            <nav className="hidden md:flex items-center gap-6">
+              {navLinks.map((link) => (
+                  <Link key={link.href} href={link.href} className="text-sm font-medium uppercase tracking-widest hover:text-primary transition-colors">
+                      {link.label}
+                  </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="flex-1 flex justify-center">
             <Link href="/" className="flex items-center gap-2 text-lg font-bold font-headline uppercase tracking-wider">
               <span>T-Shirt ID</span>
             </Link>
           </div>
 
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="text-sm font-medium uppercase tracking-widest hover:text-primary transition-colors">
-                    {link.label}
-                </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
+          <div className="flex-1 flex justify-end items-center gap-2">
             <CartIcon />
             <div className="md:hidden">
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
