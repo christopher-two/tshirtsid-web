@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FirebaseClientProvider } from '@/firebase';
+import { CartProvider } from '@/context/CartContext';
 
 const poppins = Poppins({ 
   subsets: ['latin'], 
@@ -31,6 +32,7 @@ export default function RootLayout({
       </head>
       <body className={`font-body antialiased bg-background text-foreground ${poppins.variable}`}>
         <FirebaseClientProvider>
+          <CartProvider>
             <div className="flex flex-col min-h-screen" id="app-container">
               <Header />
               <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -39,6 +41,7 @@ export default function RootLayout({
               <Footer />
             </div>
             <Toaster />
+          </CartProvider>
         </FirebaseClientProvider>
       </body>
     </html>

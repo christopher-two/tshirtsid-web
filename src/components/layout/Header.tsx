@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link';
-import { Menu, MessageCircle, LogOut } from 'lucide-react';
+import { Menu, LogOut } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -13,6 +13,7 @@ import { Button } from '../ui/button';
 import { useState } from 'react';
 import { useAuth, useUser } from '@/firebase';
 import { usePathname } from 'next/navigation';
+import { CartIcon } from '../cart/CartIcon';
 
 const navLinks = [
     { href: '/collection', label: 'Colección' },
@@ -50,12 +51,7 @@ export function Header() {
           </div>
 
           <div className="flex-1 flex justify-end items-center gap-2">
-            <Button asChild variant="ghost" size="icon">
-              <Link href="/cart">
-                <MessageCircle className="h-5 w-5" />
-                <span className="sr-only">Contacto</span>
-              </Link>
-            </Button>
+            <CartIcon />
             {user && (
                  <Button variant="ghost" size="icon" onClick={() => auth.signOut()}>
                     <LogOut className="h-5 w-5" />

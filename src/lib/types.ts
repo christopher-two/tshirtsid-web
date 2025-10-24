@@ -11,3 +11,9 @@ export interface TShirt {
   createdAt?: { seconds: number, nanoseconds: number };
   updatedAt?: { seconds: number, nanoseconds: number };
 }
+
+
+export interface CartItem extends TShirt {
+    quantity: number;
+    size: string;
+}
