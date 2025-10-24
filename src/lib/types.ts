@@ -9,13 +9,3 @@ export interface Product {
   imageHint: string;
   category: 'men' | 'women' | 'kids';
 }
-
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  imageId: string;
-  imageHint: string;
-  quantity: number;
-  size: string;
-}

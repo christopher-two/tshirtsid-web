@@ -2,7 +2,7 @@ import { products } from '@/lib/products';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { AddToCart } from '@/components/products/AddToCart';
+import { WhatsAppButton } from '@/components/products/WhatsAppButton';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -57,7 +57,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             <h1 className="text-3xl lg:text-4xl font-bold font-headline uppercase">{product.name}</h1>
             <p className="text-3xl font-semibold text-primary">${product.price.toFixed(2)}</p>
             <p className="text-muted-foreground lg:text-lg">{product.longDescription}</p>
-            <AddToCart product={product} />
+            <WhatsAppButton product={product} />
           </div>
         </div>
       </div>

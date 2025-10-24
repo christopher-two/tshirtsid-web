@@ -1,8 +1,7 @@
 "use client"
 
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
-import { CartIcon } from '@/components/cart/CartIcon';
+import { Menu, MessageCircle } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -40,7 +39,12 @@ export function Header() {
           </div>
 
           <div className="flex-1 flex justify-end items-center gap-2">
-            <CartIcon />
+            <Button asChild variant="ghost" size="icon">
+              <Link href="/cart">
+                <MessageCircle className="h-5 w-5" />
+                <span className="sr-only">Contacto</span>
+              </Link>
+            </Button>
             <div className="md:hidden">
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>
