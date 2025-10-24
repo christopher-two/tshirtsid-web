@@ -10,13 +10,13 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const GenerateProductDetailsInputSchema = z.object({
+const GenerateProductDetailsInputSchema = z.object({
   name: z.string().describe('The name of the t-shirt.'),
   category: z.enum(['men', 'women', 'kids']).describe('The category for the t-shirt.'),
 });
 export type GenerateProductDetailsInput = z.infer<typeof GenerateProductDetailsInputSchema>;
 
-export const GenerateProductDetailsOutputSchema = z.object({
+const GenerateProductDetailsOutputSchema = z.object({
   description: z.string().describe('A short, catchy description for the t-shirt (around 10 words).'),
   longDescription: z.string().describe('A longer, more detailed description for the t-shirt product page (2-3 sentences).'),
   price: z.number().describe('A suggested price for the t-shirt, as a number.'),
