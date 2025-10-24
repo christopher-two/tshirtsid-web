@@ -12,34 +12,40 @@ export function Footer() {
       return null;
   }
   const footerLinks = {
-    Producto: [
-      { title: "Visión General", href: "#" },
-      { title: "Capacidades", href: "#" },
-      { title: "Precios", href: "#" },
+    Colecciones: [
+      { title: "Hombres", href: "/collection/men" },
+      { title: "Mujeres", href: "/collection/women" },
+      { title: "Niños", href: "/collection/kids" },
     ],
-    Recursos: [
-      { title: "Documentación", href: "#" },
-      { title: "Soporte", href: "#" },
-      { title: "Comunidad", href: "#" },
-    ],
-    Empresa: [
-      { title: "Acerca de", href: "#" },
-      { title: "Carreras", href: "#" },
-      { title: "Contacto", href: "#" },
+    Información: [
+      { title: "Nuestra Colección", href: "/collection" },
+      { title: "Contacto", href: "/cart" },
+      { title: "Sobre Nosotros", href: "#" },
     ],
     Legal: [
-      { title: "Privacidad", href: "#" },
-      { title: "Términos", href: "#" },
-      { title: "Cookies", href: "#" },
+      { title: "Política de Privacidad", href: "#" },
+      { title: "Términos de Servicio", href: "#" },
+      { title: "Política de Envíos", href: "#" },
     ],
   };
 
   return (
     <footer className="bg-background text-foreground border-t-2 border-foreground mt-16">
       <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
             <h2 className="text-2xl font-bold font-headline uppercase tracking-wider">T-Shirt ID</h2>
+             <div className="flex space-x-4 mt-4">
+               <Link href="#" className="text-muted-foreground hover:text-primary">
+                 <Twitter className="w-5 h-5" />
+               </Link>
+               <Link href="#" className="text-muted-foreground hover:text-primary">
+                 <Linkedin className="w-5 h-5" />
+               </Link>
+               <Link href="#" className="text-muted-foreground hover:text-primary">
+                 <Github className="w-5 h-5" />
+               </Link>
+            </div>
           </div>
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
@@ -74,17 +80,6 @@ export function Footer() {
                 ChristopherTwo
               </Link>
             </p>
-            <div className="flex space-x-4">
-               <Link href="#" className="text-muted-foreground hover:text-primary">
-                 <Twitter className="w-5 h-5" />
-               </Link>
-               <Link href="#" className="text-muted-foreground hover:text-primary">
-                 <Linkedin className="w-5 h-5" />
-               </Link>
-               <Link href="#" className="text-muted-foreground hover:text-primary">
-                 <Github className="w-5 h-5" />
-               </Link>
-            </div>
           </div>
         </div>
       </div>
