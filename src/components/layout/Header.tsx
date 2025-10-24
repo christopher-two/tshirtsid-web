@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link';
-import { Menu, MessageCircle } from 'lucide-react';
+import { Menu, MessageCircle, LogOut } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet"
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import { useAuth, useUser } from '@/firebase';
 
 const navLinks = [
     { href: '/collection', label: 'Colección' },
@@ -16,6 +17,8 @@ const navLinks = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
+  const auth = useAuth();
 
   return (
     <header className="bg-background border-b-2 border-foreground sticky top-0 z-40">
@@ -45,6 +48,12 @@ export function Header() {
                 <span className="sr-only">Contacto</span>
               </Link>
             </Button>
+            {user && (
+                 <Button variant="ghost" size="icon" onClick={() => auth.signOut()}>
+                    <LogOut className="h-5 w-5" />
+                    <span className="sr-only">Cerrar Sesión</span>
+                </Button>
+            )}
             <div className="md:hidden">
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>

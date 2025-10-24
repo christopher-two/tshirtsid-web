@@ -26,7 +26,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-background text-foreground border-t-2 border-foreground">
+    <footer className="bg-background text-foreground border-t-2 border-foreground mt-16">
       <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
@@ -50,9 +50,14 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground order-2 sm:order-1 mt-4 sm:mt-0">
-            &copy; {new Date().getFullYear()} T-Shirt ID. Todos los derechos reservados.
-          </p>
+          <div className="text-sm text-muted-foreground order-2 sm:order-1 mt-4 sm:mt-0 space-y-2 sm:space-y-0 text-center sm:text-left">
+             <p>
+                &copy; {new Date().getFullYear()} T-Shirt ID. Todos los derechos reservados.
+             </p>
+             <p>
+                <Link href="/login" className="underline hover:text-primary">Admin</Link>
+             </p>
+          </div>
           <div className="flex items-center space-x-4 order-1 sm:order-2">
             <p className="text-sm text-muted-foreground flex items-center">
               Desarrollado con <Heart className="w-4 h-4 mx-1 text-primary fill-current" /> por&nbsp;
