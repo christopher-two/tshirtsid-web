@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
@@ -53,16 +54,10 @@ export default function EditProductPage() {
         const contextualError = new FirestorePermissionError({
             path: productDocRef.path,
             operation: 'update',
-            requestResourceData: updatedProductDatan,
+            requestResourceData: updatedProductData,
         });
 
         errorEmitter.emit('permission-error', contextualError);
-
-        toast({
-          title: 'Error de Permisos',
-          description: 'No tienes permiso para editar este producto.',
-          variant: 'destructive',
-        });
       })
       .finally(() => {
         setIsSubmitting(false);
