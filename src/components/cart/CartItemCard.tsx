@@ -8,20 +8,15 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { Card } from "../ui/card";
-
-interface CartItemCardProps {
-  item: CartItem;
-}
 
 export function CartItemCard({ item }: CartItemCardProps) {
   const { updateQuantity, removeFromCart } = useCart();
   const placeholder = PlaceHolderImages.find(p => p.id === item.imageId);
 
   return (
-    <Card className="p-4">
+    <div className="p-4 border-2 border-foreground">
       <div className="flex items-center gap-4">
-        <div className="relative h-24 w-24 rounded-md overflow-hidden bg-muted-foreground/10 flex-shrink-0">
+        <div className="relative h-24 w-24 bg-black flex-shrink-0 border-2 border-foreground">
           {placeholder && (
             <Image
               src={placeholder.imageUrl}
@@ -35,7 +30,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
 
         <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
           <div className="md:col-span-1">
-            <Link href={`/products/${item.id}`} className="font-semibold hover:underline">
+            <Link href={`/products/${item.id}`} className="font-semibold hover:text-primary uppercase">
               {item.name}
             </Link>
             <p className="text-sm text-muted-foreground">Talla: {item.size}</p>
@@ -69,7 +64,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
           </div>
 
           <div className="flex items-center gap-4 justify-self-start md:justify-self-end">
-            <p className="font-semibold w-20 text-right">
+            <p className="font-semibold w-20 text-right text-lg text-primary">
               ${(item.price * item.quantity).toFixed(2)}
             </p>
             <Button
@@ -83,6 +78,6 @@ export function CartItemCard({ item }: CartItemCardProps) {
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 }

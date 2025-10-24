@@ -19,13 +19,13 @@ export function CartView() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="text-center py-16 border-2 border-dashed rounded-lg">
+      <div className="text-center py-16 border-2 border-dashed border-foreground">
         <ShoppingBag className="mx-auto h-12 w-12 text-muted-foreground" />
-        <h2 className="mt-4 text-xl font-semibold">Tu carrito está vacío</h2>
+        <h2 className="mt-4 text-xl font-semibold uppercase">Tu carrito está vacío</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Parece que aún no has añadido nada a tu carrito.
         </p>
-        <Button asChild className="mt-6">
+        <Button asChild className="mt-6 uppercase font-bold">
           <Link href="/">Empezar a Comprar</Link>
         </Button>
       </div>
@@ -70,28 +70,28 @@ export function CartView() {
         ))}
       </div>
       <div className="lg:col-span-1">
-        <Card className="sticky top-24">
+        <Card className="sticky top-24 border-2 border-foreground">
           <CardHeader>
-            <CardTitle>Resumen del Pedido</CardTitle>
+            <CardTitle className="uppercase">Resumen del Pedido</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-between">
-              <span>Subtotal</span>
+              <span className="uppercase">Subtotal</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Envío</span>
-              <span className="font-medium">Gratis</span>
+              <span className="uppercase">Envío</span>
+              <span className="font-medium text-primary">Gratis</span>
             </div>
             <Separator />
             <div className="flex justify-between font-bold text-lg">
-              <span>Total</span>
+              <span className="uppercase">Total</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Button className="w-full" size="lg" onClick={handleCheckout}>Proceder al Pago</Button>
-            <Button asChild variant="outline" className="w-full">
+            <Button className="w-full uppercase font-bold" size="lg" onClick={handleCheckout}>Proceder al Pago</Button>
+            <Button asChild variant="outline" className="w-full uppercase">
               <Link href="/">Seguir Comprando</Link>
             </Button>
           </CardFooter>

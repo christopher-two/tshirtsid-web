@@ -52,7 +52,7 @@ export function ProductView({ allProducts }: ProductViewProps) {
     <div>
       <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-end">
         <div className="flex items-center gap-2">
-          <label htmlFor="filter-size" className="text-sm font-medium">Filtrar por talla:</label>
+          <label htmlFor="filter-size" className="text-sm font-medium uppercase">Filtrar:</label>
           <Select value={filterSize} onValueChange={setFilterSize}>
             <SelectTrigger id="filter-size" className="w-[120px]">
               <SelectValue placeholder="Talla" />
@@ -66,7 +66,7 @@ export function ProductView({ allProducts }: ProductViewProps) {
           </Select>
         </div>
         <div className="flex items-center gap-2">
-          <label htmlFor="sort-by" className="text-sm font-medium">Ordenar por:</label>
+          <label htmlFor="sort-by" className="text-sm font-medium uppercase">Ordenar:</label>
           <Select value={sortKey} onValueChange={(value) => setSortKey(value as SortKey)}>
             <SelectTrigger id="sort-by" className="w-[180px]">
               <SelectValue placeholder="Ordenar" />

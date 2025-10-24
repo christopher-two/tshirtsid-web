@@ -33,32 +33,33 @@ export function FeaturesSection() {
   return (
     <section className="py-16 sm:py-24 space-y-16 overflow-hidden">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight font-headline">Pasión por lo que Hacemos</h2>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight font-headline uppercase">Pasión por lo que Hacemos</h2>
         <p className="mt-4 max-w-3xl mx-auto text-muted-foreground">
           No solo vendemos camisetas, creamos piezas de arte que puedes vestir. Descubre la calidad y la creatividad que nos definen.
         </p>
       </div>
-      <div className="space-y-12">
+      <div className="space-y-8">
         {features.map((feature, index) => (
-          <div key={index} className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className={`w-full md:w-1/2 ${feature.align === 'left' ? 'md:order-1' : 'md:order-2'}`}>
-              <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+          <div key={index} className="grid grid-cols-1 md:grid-cols-5 items-center gap-8 md:gap-12 border-2 border-foreground p-8">
+            <div className={`md:col-span-2 ${feature.align === 'left' ? 'md:order-1' : 'md:order-2'}`}>
+              <div className="relative aspect-video">
                 <Image
                   src={feature.imageUrl}
                   alt={feature.title}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 40vw"
                   data-ai-hint={feature.imageHint}
                 />
+                 <div className="absolute inset-0 bg-primary/20"></div>
               </div>
             </div>
-            <div className={`w-full md:w-1/2 ${feature.align === 'left' ? 'md:order-2' : 'md:order-1'}`}>
+            <div className={`md:col-span-3 ${feature.align === 'left' ? 'md:order-2' : 'md:order-1'}`}>
               <div className="space-y-4 text-center md:text-left">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-background border-2 border-primary mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-bold font-headline">{feature.title}</h3>
+                <h3 className="text-2xl font-bold font-headline uppercase">{feature.title}</h3>
                 <p className="text-muted-foreground text-lg">{feature.description}</p>
               </div>
             </div>

@@ -31,7 +31,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <div className="space-y-8">
       <div>
-        <Button asChild variant="ghost" className="-ml-4">
+        <Button asChild variant="ghost" className="-ml-4 uppercase">
           <Link href="/collection">
             <ChevronLeft className="mr-2 h-4 w-4" />
             Volver a todos los productos
@@ -39,7 +39,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         </Button>
       </div>
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-        <div className="aspect-[3/4] relative rounded-lg overflow-hidden bg-card border">
+        <div className="aspect-[3/4] relative bg-black border-2 border-foreground">
           {placeholder && (
             <Image
               src={placeholder.imageUrl}
@@ -54,8 +54,8 @@ export default function ProductPage({ params }: ProductPageProps) {
         </div>
         <div className="flex flex-col justify-center">
           <div className="space-y-4">
-            <h1 className="text-3xl lg:text-4xl font-bold font-headline">{product.name}</h1>
-            <p className="text-2xl font-semibold">${product.price.toFixed(2)}</p>
+            <h1 className="text-3xl lg:text-4xl font-bold font-headline uppercase">{product.name}</h1>
+            <p className="text-3xl font-semibold text-primary">${product.price.toFixed(2)}</p>
             <p className="text-muted-foreground lg:text-lg">{product.longDescription}</p>
             <AddToCart product={product} />
           </div>

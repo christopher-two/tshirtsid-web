@@ -29,7 +29,7 @@ export function AddToCart({ product }: AddToCartProps) {
   return (
     <div className="space-y-6 pt-4">
       <div>
-        <Label className="text-base font-medium">Talla</Label>
+        <Label className="text-base font-medium uppercase">Talla</Label>
         <RadioGroup
           value={selectedSize}
           onValueChange={setSelectedSize}
@@ -40,7 +40,7 @@ export function AddToCart({ product }: AddToCartProps) {
               <RadioGroupItem value={size} id={`size-${size}`} className="sr-only" />
               <Label
                 htmlFor={`size-${size}`}
-                className="flex items-center justify-center rounded-md border-2 p-3 text-sm font-medium uppercase hover:bg-accent focus:outline-none cursor-pointer data-[state=checked]:border-primary"
+                className="flex items-center justify-center border-2 p-3 text-sm font-medium uppercase hover:bg-accent focus:outline-none cursor-pointer data-[state=checked]:border-primary data-[state=checked]:text-primary"
                 data-state={selectedSize === size ? 'checked' : 'unchecked'}
               >
                 {size}
@@ -50,7 +50,7 @@ export function AddToCart({ product }: AddToCartProps) {
         </RadioGroup>
         {error && <p className="text-sm font-medium text-destructive mt-2">{error}</p>}
       </div>
-      <Button size="lg" className="w-full" onClick={handleAddToCart} disabled={!selectedSize}>
+      <Button size="lg" className="w-full uppercase font-bold" onClick={handleAddToCart} disabled={!selectedSize}>
         <ShoppingBag className="mr-2 h-5 w-5" />
         Añadir al Carrito
       </Button>
