@@ -1,13 +1,13 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import type { Product, CartItem } from '@/lib/types';
+import type { TShirt, CartItem } from '@/lib/types';
 import { useToast } from "@/hooks/use-toast"
 
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Product, size: string) => void;
+  addToCart: (product: TShirt, size: string) => void;
   removeFromCart: (id: string, size: string) => void;
   updateQuantity: (id: string, size: string, quantity: number) => void;
   clearCart: () => void;
@@ -19,7 +19,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const { toast } = useToast()
 
-  const addToCart = (product: Product, size: string) => {
+  const addToCart = (product: TShirt, size: string) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id && item.size === size);
       if (existingItem) {

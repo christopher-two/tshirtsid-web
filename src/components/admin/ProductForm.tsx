@@ -17,13 +17,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { TShirt } from '@/lib/types';
 import { useEffect, useState } from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Sparkles } from 'lucide-react';
 import { generateProductDetails } from '@/ai/flows/generate-product-flow';
 import { useToast } from '@/hooks/use-toast';
@@ -62,7 +55,7 @@ const formSchema = z.object({
 type ProductFormValues = z.infer<typeof formSchema>;
 
 interface ProductFormProps {
-  onSubmit: (data: Omit<TShirt, 'id' | 'imageId'> & { sizes: string[], category: ('men' | 'women' | 'kids')[] }) => void;
+  onSubmit: (data: Omit<TShirt, 'id'>) => void;
   initialData?: TShirt;
   isSubmitting?: boolean;
 }

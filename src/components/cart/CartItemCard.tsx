@@ -4,22 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import type { CartItem } from "@/lib/types";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus, Trash2 } from "lucide-react";
 
+interface CartItemCardProps {
+  item: CartItem;
+}
+
 export function CartItemCard({ item }: CartItemCardProps) {
   const { updateQuantity, removeFromCart } = useCart();
-  const placeholder = PlaceHolderImages.find(p => p.id === item.imageId);
+  const imageUrl = item.imageUrl;
 
   return (
     <div className="p-4 border-2 border-foreground">
       <div className="flex items-center gap-4">
         <div className="relative h-24 w-24 bg-black flex-shrink-0 border-2 border-foreground">
-          {placeholder && (
+          {imageUrl && (
             <Image
-              src={placeholder.imageUrl}
+              src={imageUrl}
               alt={item.name}
               fill
               className="object-cover"
