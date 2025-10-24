@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { TShirt } from '@/lib/types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -24,6 +24,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Sparkles } from 'lucide-react';
+import { generateProductDetails } from '@/ai/flows/generate-product-flow';
+import { useToast } from '@/hooks/use-toast';
+
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -61,6 +65,8 @@ interface ProductFormProps {
 }
 
 export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductFormProps) {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const { toast } = useToast();
     
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
@@ -84,6 +90,44 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
       });
     }
   }, [initialData, form]);
+  
+  const handleGenerateDetails = async () => {
+    const name = form.getValues('name');
+    const category = form.getValues('category');
+
+    if (!name) {
+      form.setError('name', { message: 'Por favor, introduce un nombre primero.' });
+      return;
+    }
+    
+    setIsGenerating(true);
+    toast({
+      title: 'Generando detalles...',
+      description: 'La IA está creando el contenido del producto.',
+    });
+    
+    try {
+      const result = await generateProductDetails({ name, category });
+      form.setValue('description', result.description, { shouldValidate: true });
+      form.setValue('longDescription', result.longDescription, { shouldValidate: true });
+      form.setValue('price', result.price, { shouldValidate: true });
+      form.setValue('imageHint', result.imageHint, { shouldValidate: true });
+       toast({
+        title: '¡Contenido generado!',
+        description: 'Los campos se han rellenado automáticamente.',
+      });
+    } catch (error) {
+      console.error('Error al generar detalles con IA:', error);
+       toast({
+        title: 'Error de la IA',
+        description: 'No se pudo generar el contenido. Por favor, inténtalo de nuevo.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
 
   const handleSubmit = (values: ProductFormValues) => {
     onSubmit(values);
@@ -98,9 +142,15 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nombre del Producto</FormLabel>
-              <FormControl>
-                <Input placeholder="Ej: Camiseta Minimalista" {...field} />
-              </FormControl>
+                <div className="flex gap-2">
+                    <FormControl>
+                        <Input placeholder="Ej: Camiseta Minimalista" {...field} />
+                    </FormControl>
+                    <Button type="button" variant="outline" size="icon" onClick={handleGenerateDetails} disabled={isGenerating}>
+                        <Sparkles className={`h-4 w-4 ${isGenerating ? 'animate-spin' : ''}`} />
+                        <span className="sr-only">Generar con IA</span>
+                    </Button>
+                </div>
               <FormMessage />
             </FormItem>
           )}
@@ -214,7 +264,7 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting || isGenerating}>
           {isSubmitting ? 'Guardando...' : 'Guardar Producto'}
         </Button>
       </form>
