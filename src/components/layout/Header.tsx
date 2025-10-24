@@ -12,7 +12,6 @@ import { Button } from '../ui/button';
 import { useState } from 'react';
 
 const navLinks = [
-    { href: '/', label: 'Inicio' },
     { href: '/collection', label: 'Colección' },
 ]
 
