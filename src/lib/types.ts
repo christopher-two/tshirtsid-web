@@ -7,7 +7,7 @@ export interface TShirt {
   sizes: string[];
   imageUrl: string;
   imageHint: string;
-  category: 'men' | 'women' | 'kids';
+  category: ('men' | 'women' | 'kids')[];
   createdAt?: { seconds: number, nanoseconds: number };
   updatedAt?: { seconds: number, nanoseconds: number };
 }

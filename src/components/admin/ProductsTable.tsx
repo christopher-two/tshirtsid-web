@@ -118,7 +118,7 @@ export function ProductsTable() {
         return <p className="text-center text-muted-foreground">No se encontraron productos.</p>
     }
 
-    const categoryTitles = {
+    const categoryTitles: Record<string, string> = {
         men: 'Hombre',
         women: 'Mujer',
         kids: 'Niños'
@@ -133,7 +133,7 @@ export function ProductsTable() {
               <span className="sr-only">Imagen</span>
             </TableHead>
             <TableHead>Nombre</TableHead>
-            <TableHead>Categoría</TableHead>
+            <TableHead>Categorías</TableHead>
             <TableHead className="hidden md:table-cell">Tallas</TableHead>
             <TableHead className="hidden md:table-cell">Precio</TableHead>
             <TableHead>
@@ -162,7 +162,11 @@ export function ProductsTable() {
                     </TableCell>
                     <TableCell className="font-medium">{product.name}</TableCell>
                     <TableCell>
-                        <Badge variant="outline">{categoryTitles[product.category]}</Badge>
+                        <div className="flex flex-wrap gap-1">
+                            {product.category.map(cat => (
+                                <Badge key={cat} variant="outline">{categoryTitles[cat] || cat}</Badge>
+                            ))}
+                        </div>
                     </TableCell>
                     <TableCell className="hidden md:table-cell">{product.sizes.join(', ')}</TableCell>
                     <TableCell className="hidden md:table-cell">${product.price.toFixed(2)}</TableCell>

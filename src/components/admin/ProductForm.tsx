@@ -30,6 +30,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Checkbox } from "@/components/ui/checkbox"
 
 const ALL_SIZES = ["XS", "S", "M", "L", "XL", "XXL"] as const;
+const ALL_CATEGORIES = ["men", "women", "kids"] as const;
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -53,15 +54,15 @@ const formSchema = z.object({
   imageHint: z.string().min(1, {
     message: 'Se requiere una pista de imagen.',
   }),
-  category: z.enum(['men', 'women', 'kids'], {
-    errorMap: () => ({ message: "La categoría debe ser 'men', 'women' o 'kids'." }),
+  category: z.array(z.enum(['men', 'women', 'kids'])).refine(value => value.some(item => item), {
+    message: "Debes seleccionar al menos una categoría.",
   }),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
 
 interface ProductFormProps {
-  onSubmit: (data: Omit<TShirt, 'id' | 'imageId'> & { sizes: string[] }) => void;
+  onSubmit: (data: Omit<TShirt, 'id' | 'imageId'> & { sizes: string[], category: ('men' | 'women' | 'kids')[] }) => void;
   initialData?: TShirt;
   isSubmitting?: boolean;
 }
@@ -80,7 +81,7 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
       sizes: [],
       imageUrl: '',
       imageHint: '',
-      category: 'men',
+      category: [],
     },
   });
 
@@ -89,17 +90,22 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
       form.reset({
         ...initialData,
         sizes: initialData.sizes || [],
+        category: initialData.category || [],
       });
     }
   }, [initialData, form]);
   
   const handleGenerateDetails = async () => {
     const name = form.getValues('name');
-    const category = form.getValues('category');
-
+    const categories = form.getValues('category');
+    
     if (!name) {
       form.setError('name', { message: 'Por favor, introduce un nombre primero.' });
       return;
+    }
+    if (categories.length === 0) {
+        form.setError('category', { message: 'Por favor, selecciona al menos una categoría para la IA.'});
+        return;
     }
     
     setIsGenerating(true);
@@ -109,7 +115,8 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
     });
     
     try {
-      const result = await generateProductDetails({ name, category });
+      // Pass only the first category to the AI for simplicity
+      const result = await generateProductDetails({ name, category: categories[0] });
       form.setValue('description', result.description, { shouldValidate: true });
       form.setValue('longDescription', result.longDescription, { shouldValidate: true });
       form.setValue('price', result.price, { shouldValidate: true });
@@ -279,26 +286,54 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
           )}
         />
         <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Categoría</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona una categoría" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="men">Hombre</SelectItem>
-                  <SelectItem value="women">Mujer</SelectItem>
-                  <SelectItem value="kids">Niños</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
+            control={form.control}
+            name="category"
+            render={() => (
+                <FormItem>
+                <div className="mb-4">
+                    <FormLabel>Categorías</FormLabel>
+                    <FormDescription>
+                    Selecciona las categorías para esta camiseta.
+                    </FormDescription>
+                </div>
+                <div className="flex flex-wrap gap-4">
+                    {ALL_CATEGORIES.map((category) => (
+                    <FormField
+                        key={category}
+                        control={form.control}
+                        name="category"
+                        render={({ field }) => {
+                        return (
+                            <FormItem
+                            key={category}
+                            className="flex flex-row items-start space-x-3 space-y-0"
+                            >
+                            <FormControl>
+                                <Checkbox
+                                checked={field.value?.includes(category)}
+                                onCheckedChange={(checked) => {
+                                    return checked
+                                    ? field.onChange([...field.value, category])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                        (value) => value !== category
+                                        )
+                                    );
+                                }}
+                                />
+                            </FormControl>
+                            <FormLabel className="font-normal capitalize">
+                                {category === 'men' ? 'Hombre' : category === 'women' ? 'Mujer' : 'Niños'}
+                            </FormLabel>
+                            </FormItem>
+                        );
+                        }}
+                    />
+                    ))}
+                </div>
+                <FormMessage />
+                </FormItem>
+            )}
         />
         <Button type="submit" disabled={isSubmitting || isGenerating}>
           {isSubmitting ? 'Guardando...' : 'Guardar Producto'}

@@ -42,9 +42,12 @@
           "description": "Hint for AI image generation."
         },
         "category": {
-          "type": "string",
-          "description": "Category of the t-shirt (men, women, kids).",
-          "enum": ["men", "women", "kids"]
+          "type": "array",
+          "description": "Categories of the t-shirt (men, women, kids).",
+          "items": {
+            "type": "string",
+            "enum": ["men", "women", "kids"]
+          }
         }
       },
       "required": [

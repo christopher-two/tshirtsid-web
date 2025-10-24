@@ -13,7 +13,7 @@ export default function AddProductPage() {
   const { toast } = useToast();
   const router = useRouter();
 
-  const handleAddProduct = async (data: Omit<TShirt, 'id' | 'imageId'>) => {
+  const handleAddProduct = async (data: Omit<TShirt, 'id'>) => {
     if (!firestore) return;
 
     try {

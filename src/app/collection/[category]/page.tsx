@@ -25,7 +25,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   const productsQuery = useMemoFirebase(() => {
     if (!firestore) return null;
     const productsCollection = collection(firestore, 'tshirts');
-    return query(productsCollection, where('category', '==', category));
+    return query(productsCollection, where('category', 'array-contains', category));
   }, [firestore, category]);
 
   const { data: filteredProducts, isLoading } = useCollection<TShirt>(productsQuery);
@@ -34,7 +34,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
   
-  const categoryTitles = {
+  const categoryTitles: Record<string, string> = {
     men: 'Hombres',
     women: 'Mujeres',
     kids: 'Niños'
@@ -51,7 +51,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
             </Button>
         </div>
       <h2 className="text-3xl font-bold tracking-tight mb-4 font-headline text-center my-8">
-        Colección de {categoryTitles[category as keyof typeof categoryTitles]}
+        Colección de {categoryTitles[category] || category}
       </h2>
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
