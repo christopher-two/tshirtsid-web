@@ -10,6 +10,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     imageId: 'tshirt-geo-abstract',
     imageHint: 'geometric tshirt',
+    category: 'men',
   },
   {
     id: 'minimal-wave',
@@ -20,6 +21,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L'],
     imageId: 'tshirt-minimal-wave',
     imageHint: 'minimalist tshirt',
+    category: 'women',
   },
   {
     id: 'vintage-logo',
@@ -30,6 +32,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     imageId: 'tshirt-vintage-logo',
     imageHint: 'vintage tshirt',
+    category: 'men',
   },
   {
     id: 'botanical-print',
@@ -40,6 +43,7 @@ export const products: Product[] = [
     sizes: ['M', 'L', 'XL'],
     imageId: 'tshirt-botanical',
     imageHint: 'botanical print',
+    category: 'women',
   },
   {
     id: 'space-explorer',
@@ -50,6 +54,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     imageId: 'tshirt-space-explorer',
     imageHint: 'space tshirt',
+    category: 'kids',
   },
   {
     id: 'cityscape-lines',
@@ -60,6 +65,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L'],
     imageId: 'tshirt-cityscape',
     imageHint: 'cityscape tshirt',
+    category: 'men',
   },
   {
     id: 'striped-classic',
@@ -70,6 +76,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     imageId: 'tshirt-striped-classic',
     imageHint: 'striped shirt',
+    category: 'women',
   },
   {
     id: 'plain-black',
@@ -80,6 +87,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     imageId: 'tshirt-plain-black',
     imageHint: 'black tshirt',
+    category: 'men',
   },
   {
     id: 'origami-crane',
@@ -90,5 +98,6 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L'],
     imageId: 'tshirt-origami-crane',
     imageHint: 'origami tshirt',
+    category: 'kids',
   },
 ];

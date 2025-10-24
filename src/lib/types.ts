@@ -7,6 +7,7 @@ export interface Product {
   sizes: string[];
   imageId: string;
   imageHint: string;
+  category: 'men' | 'women' | 'kids';
 }
 
 export interface CartItem {

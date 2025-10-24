@@ -1,13 +1,21 @@
 import { products } from '@/lib/products';
 import { ProductView } from '@/components/products/ProductView';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
 
 export default function CollectionPage() {
   return (
     <section id="products">
-      <h2 className="text-3xl font-bold tracking-tight mb-4 font-headline">Nuestra Colección</h2>
-      <p className="text-muted-foreground mb-8">
-        Descubre tu próxima camiseta favorita de nuestra selección curada.
-      </p>
+        <div>
+            <Button asChild variant="ghost" className="-ml-4 uppercase">
+              <Link href="/">
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                Volver
+              </Link>
+            </Button>
+        </div>
+      <h2 className="text-3xl font-bold tracking-tight mb-4 font-headline text-center my-8">Nuestra Colección</h2>
       <ProductView allProducts={products} />
     </section>
   );
