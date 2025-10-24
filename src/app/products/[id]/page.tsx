@@ -2,7 +2,7 @@
 
 import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { WhatsAppButton } from '@/components/products/WhatsAppButton';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
@@ -11,19 +11,16 @@ import { doc } from 'firebase/firestore';
 import type { TShirt } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
 
-export default function ProductPage({ params }: ProductPageProps) {
+export default function ProductPage() {
   const firestore = useFirestore();
+  const params = useParams();
+  const productId = Array.isArray(params.id) ? params.id[0] : params.id;
   
   const productRef = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return doc(firestore, 'tshirts', params.id);
-  }, [firestore, params.id]);
+    if (!firestore || !productId) return null;
+    return doc(firestore, 'tshirts', productId);
+  }, [firestore, productId]);
 
   const { data: product, isLoading } = useDoc<TShirt>(productRef);
 
