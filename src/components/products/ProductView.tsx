@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useMemo } from 'react';
-import type { Product } from '@/lib/types';
+import type { TShirt } from '@/lib/types';
 import { ProductGrid } from './ProductGrid';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ProductViewProps {
-  allProducts: Product[];
+  allProducts: TShirt[];
 }
 
 type SortKey = 'name-asc' | 'name-desc' | 'price-asc' | 'price-desc' | 'default';

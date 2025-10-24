@@ -1,4 +1,4 @@
-import { products } from '@/lib/products';
+import { tshirts } from '@/lib/tshirts';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -14,13 +14,13 @@ interface ProductPageProps {
 }
 
 export function generateStaticParams() {
-  return products.map(product => ({
+  return tshirts.map(product => ({
     id: product.id,
   }));
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const product = products.find(p => p.id === params.id);
+  const product = tshirts.find(p => p.id === params.id);
   
   if (!product) {
     notFound();

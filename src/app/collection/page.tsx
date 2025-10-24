@@ -1,4 +1,4 @@
-import { products } from '@/lib/products';
+import { tshirts } from '@/lib/tshirts';
 import { ProductView } from '@/components/products/ProductView';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ export default function CollectionPage() {
             </Button>
         </div>
       <h2 className="text-3xl font-bold tracking-tight mb-4 font-headline text-center my-8">Nuestra Colección</h2>
-      <ProductView allProducts={products} />
+      <ProductView allProducts={tshirts} />
     </section>
   );
 }

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Product } from '@/lib/types';
+import type { TShirt } from '@/lib/types';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 
 interface ProductCardProps {
-  product: Product;
+  product: TShirt;
 }
 
 export function ProductCard({ product }: ProductCardProps) {

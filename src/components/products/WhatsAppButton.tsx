@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from 'react';
-import type { Product } from '@/lib/types';
+import type { TShirt } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { MessageCircle } from 'lucide-react';
 
 interface WhatsAppButtonProps {
-  product: Product;
+  product: TShirt;
 }
 
 export function WhatsAppButton({ product }: WhatsAppButtonProps) {

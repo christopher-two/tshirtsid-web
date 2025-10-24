@@ -1,4 +1,4 @@
-import { products } from '@/lib/products';
+import { tshirts } from '@/lib/tshirts';
 import { ProductView } from '@/components/products/ProductView';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -20,7 +20,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  const filteredProducts = products.filter(p => p.category === category);
+  const filteredProducts = tshirts.filter(p => p.category === category);
   
   const categoryTitles = {
     men: 'Hombres',

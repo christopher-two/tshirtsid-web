@@ -1,4 +1,4 @@
-export interface Product {
+export interface TShirt {
   id: string;
   name: string;
   description: string;
