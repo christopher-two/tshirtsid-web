@@ -4,6 +4,11 @@ import { useState, useMemo } from 'react';
 import type { TShirt } from '@/lib/types';
 import { ProductGrid } from './ProductGrid';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ProductDetail } from './ProductDetail';
+import {
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog"
 
 interface ProductViewProps {
   allProducts: TShirt[];
@@ -13,7 +18,8 @@ type SortKey = 'name-asc' | 'name-desc' | 'price-asc' | 'price-desc' | 'default'
 
 export function ProductView({ allProducts }: ProductViewProps) {
   const [sortKey, setSortKey] = useState<SortKey>('default');
-  
+  const [selectedProduct, setSelectedProduct] = useState<TShirt | null>(null);
+
   const allSizes = useMemo(() => {
     const sizes = new Set<string>();
     allProducts.forEach(p => p.sizes.forEach(s => sizes.add(s)));
@@ -48,6 +54,14 @@ export function ProductView({ allProducts }: ProductViewProps) {
     return products;
   }, [allProducts, sortKey, filterSize]);
 
+  const handleProductClick = (product: TShirt) => {
+    setSelectedProduct(product);
+  }
+
+  const handleCloseDialog = () => {
+    setSelectedProduct(null);
+  }
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-end">
@@ -81,7 +95,13 @@ export function ProductView({ allProducts }: ProductViewProps) {
           </Select>
         </div>
       </div>
-      <ProductGrid products={sortedAndFilteredProducts} />
+      <ProductGrid products={sortedAndFilteredProducts} onProductClick={handleProductClick} />
+
+      <Dialog open={!!selectedProduct} onOpenChange={(isOpen) => !isOpen && handleCloseDialog()}>
+        <DialogContent className="max-w-4xl">
+          {selectedProduct && <ProductDetail product={selectedProduct} />}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

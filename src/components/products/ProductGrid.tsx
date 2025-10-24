@@ -3,9 +3,10 @@ import { ProductCard } from './ProductCard';
 
 interface ProductGridProps {
   products: TShirt[];
+  onProductClick: (product: TShirt) => void;
 }
 
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products, onProductClick }: ProductGridProps) {
   if (products.length === 0) {
     return (
         <div className="text-center py-16">
@@ -19,7 +20,7 @@ export function ProductGrid({ products }: ProductGridProps) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-l-2 border-t-2 border-foreground">
       {products.map((product, index) => (
         <div key={product.id} className="border-r-2 border-b-2 border-foreground p-4">
-            <ProductCard product={product} />
+            <ProductCard product={product} onProductClick={onProductClick} />
         </div>
       ))}
     </div>

@@ -1,19 +1,23 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import type { TShirt } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 interface ProductCardProps {
   product: TShirt;
+  onProductClick: (product: TShirt) => void;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onProductClick }: ProductCardProps) {
+  const placeholder = PlaceHolderImages.find(p => p.id === product.imageId);
+  const imageUrl = placeholder?.imageUrl;
+
   return (
-    <Link href={`/products/${product.id}`} className="group block overflow-hidden">
+    <button onClick={() => onProductClick(product)} className="group block overflow-hidden text-left w-full">
         <div className="aspect-[3/4] relative bg-black">
-          {product.imageUrl && (
+          {imageUrl && (
             <Image
-              src={product.imageUrl}
+              src={imageUrl}
               alt={product.name}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105 group-hover:opacity-75"
@@ -27,6 +31,6 @@ export function ProductCard({ product }: ProductCardProps) {
             </Badge>
           </div>
         </div>
-    </Link>
+    </button>
   );
 }

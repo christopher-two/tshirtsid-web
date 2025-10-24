@@ -1,32 +1,25 @@
 "use client";
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import type { TShirt } from '@/lib/types';
 import { AddToCart } from './AddToCart';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 interface ProductDetailProps {
   product: TShirt;
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
+  const placeholder = PlaceHolderImages.find(p => p.id === product.imageId);
+  const imageUrl = placeholder?.imageUrl;
+
   return (
-    <div className="space-y-8">
-      <div>
-        <Button asChild variant="ghost" className="-ml-4 uppercase">
-          <Link href="/collection">
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Volver a todos los productos
-          </Link>
-        </Button>
-      </div>
+    <div className="space-y-8 p-4 md:p-0">
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
         <div className="aspect-[3/4] relative bg-black border-2 border-foreground">
-          {product.imageUrl && (
+          {imageUrl && (
             <Image
-              src={product.imageUrl}
+              src={imageUrl}
               alt={product.name}
               fill
               className="object-cover"
