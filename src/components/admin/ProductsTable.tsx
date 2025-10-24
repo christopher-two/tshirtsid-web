@@ -24,7 +24,6 @@ import {
 import { useCollection, useFirestore, useMemoFirebase } from "@/firebase";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import type { TShirt } from "@/lib/types";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Skeleton } from "../ui/skeleton";
 import {
   AlertDialog,
@@ -144,16 +143,15 @@ export function ProductsTable() {
         </TableHeader>
         <TableBody>
           {products.map((product) => {
-            const placeholder = PlaceHolderImages.find(p => p.id === product.imageId);
             return (
                 <TableRow key={product.id}>
                     <TableCell className="hidden sm:table-cell">
-                    {placeholder ? (
+                    {product.imageUrl ? (
                       <Image
                         alt={product.name}
                         className="aspect-square rounded-md object-cover"
                         height="64"
-                        src={placeholder.imageUrl}
+                        src={product.imageUrl}
                         width="64"
                       />
                     ) : (

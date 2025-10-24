@@ -41,8 +41,8 @@ const formSchema = z.object({
   sizes: z.string().min(1, {
     message: 'Debe haber al menos una talla.',
   }).transform(val => val.split(',').map(s => s.trim().toUpperCase()).filter(Boolean)),
-  imageId: z.string().min(1, {
-    message: 'Se requiere un ID de imagen.',
+  imageUrl: z.string().url({
+    message: 'Por favor, introduce una URL de imagen válida.',
   }),
   imageHint: z.string().min(1, {
     message: 'Se requiere una pista de imagen.',
@@ -70,7 +70,7 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
       longDescription: '',
       price: 0,
       sizes: [],
-      imageId: '',
+      imageUrl: '',
       imageHint: '',
       category: 'men',
     },
@@ -165,15 +165,15 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
         />
         <FormField
           control={form.control}
-          name="imageId"
+          name="imageUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ID de Imagen</FormLabel>
+              <FormLabel>URL de la Imagen</FormLabel>
               <FormControl>
-                <Input placeholder="Ej: tshirt-geo-abstract" {...field} />
+                <Input placeholder="https://ejemplo.com/imagen.jpg" {...field} />
               </FormControl>
               <FormDescription>
-                El ID de una imagen existente en `placeholder-images.json`.
+                Pega la URL de una imagen alojada en un servicio externo como Imgur.
               </FormDescription>
               <FormMessage />
             </FormItem>

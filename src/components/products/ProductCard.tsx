@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { TShirt } from '@/lib/types';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 
 interface ProductCardProps {
@@ -9,14 +8,12 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const placeholder = PlaceHolderImages.find(p => p.id === product.imageId);
-
   return (
     <Link href={`/products/${product.id}`} className="group block overflow-hidden">
         <div className="aspect-[3/4] relative bg-black">
-          {placeholder && (
+          {product.imageUrl && (
             <Image
-              src={placeholder.imageUrl}
+              src={product.imageUrl}
               alt={product.name}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105 group-hover:opacity-75"

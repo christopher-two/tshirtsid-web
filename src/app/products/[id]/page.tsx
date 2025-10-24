@@ -1,7 +1,6 @@
 "use client";
 
 import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { WhatsAppButton } from '@/components/products/WhatsAppButton';
@@ -57,8 +56,6 @@ export default function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const placeholder = PlaceHolderImages.find(p => p.id === product.imageId);
-
   return (
     <div className="space-y-8">
       <div>
@@ -71,9 +68,9 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
         <div className="aspect-[3/4] relative bg-black border-2 border-foreground">
-          {placeholder && (
+          {product.imageUrl && (
             <Image
-              src={placeholder.imageUrl}
+              src={product.imageUrl}
               alt={product.name}
               fill
               className="object-cover"

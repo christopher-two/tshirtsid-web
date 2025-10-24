@@ -1,13 +1,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
-  const getImage = (id: string) => PlaceHolderImages.find(p => p.id === id);
-
-  const womanImg = getImage('woman-fashion-1');
-  const manImg = getImage('man-fashion-1');
-  const kidsImg = getImage('kids-fashion-1');
+  const womanImg = {
+    imageUrl: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b21hbiUyMGZhc2hpb258ZW58MHx8fHwxNzYxMjM1NzgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageHint: "woman fashion"
+  };
+  const manImg = {
+    imageUrl: "https://images.unsplash.com/photo-1653694053345-b22f94c95bcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtYW4lMjBmYXNoaW9ufGVufDB8fHx8MTc2MTI5MTY4MHww&ixlib=rb-4.1.0&q=80&w=1080",
+    imageHint: "man fashion"
+  };
+  const kidsImg = {
+    imageUrl: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxraWRzJTIwZmFzaGlvbnxlbnwwfHx8fDE3NjEzMjcxMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageHint: "kids fashion"
+  };
 
   return (
       <section className="min-h-[calc(100vh-80px)] -my-8 -mx-8 flex flex-col">
@@ -21,7 +27,7 @@ export default function Home() {
                   alt="Mujer" 
                   fill 
                   className="object-cover group-hover:opacity-75 transition-opacity" 
-                  data-ai-hint="woman fashion" 
+                  data-ai-hint={womanImg.imageHint} 
                 />
                 <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/70 to-transparent">
                   <h2 className="text-5xl md:text-6xl font-black text-white uppercase">Mujer</h2>
@@ -38,7 +44,7 @@ export default function Home() {
                   alt="Hombre" 
                   fill 
                   className="object-cover group-hover:opacity-75 transition-opacity" 
-                  data-ai-hint="man fashion"
+                  data-ai-hint={manImg.imageHint}
                 />
                 <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/70 to-transparent">
                   <h2 className="text-5xl md:text-6xl font-black text-white uppercase">Hombre</h2>
@@ -55,7 +61,7 @@ export default function Home() {
                   alt="Kids" 
                   fill 
                   className="object-cover group-hover:opacity-75 transition-opacity" 
-                  data-ai-hint="kids fashion"
+                  data-ai-hint={kidsImg.imageHint}
                 />
                 <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/70 to-transparent">
                   <h2 className="text-5xl md:text-6xl font-black text-white uppercase">Kids</h2>
