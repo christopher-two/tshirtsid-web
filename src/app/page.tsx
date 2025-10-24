@@ -16,10 +16,10 @@ export default function Home() {
   };
 
   return (
-      <section className="min-h-[calc(100vh-80px)] -my-8 -mx-8 flex flex-col">
+      <section className="min-h-[calc(100vh-160px)] flex flex-col">
         <div className="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           
-          <div className="relative group">
+          <div className="relative group min-h-[60vh] md:min-h-0">
             {womanImg && (
               <Link href="/collection/women" className="absolute inset-0">
                 <Image 
@@ -36,13 +36,12 @@ export default function Home() {
             )}
           </div>
 
-          <div className="relative group">
+          <div className="relative group min-h-[60vh] md:min-h-0">
             {manImg && (
               <Link href="/collection/men" className="absolute inset-0">
                 <Image 
                   src={manImg.imageUrl} 
-                  alt="Hombre" 
-                  fill 
+                  alt="Hombre"                    fill 
                   className="object-cover group-hover:opacity-75 transition-opacity" 
                   data-ai-hint={manImg.imageHint}
                 />
@@ -53,7 +52,7 @@ export default function Home() {
             )}
           </div>
 
-          <div className="relative group md:col-span-2 lg:col-span-1">
+          <div className="relative group md:col-span-2 lg:col-span-1 min-h-[60vh] md:min-h-0">
              {kidsImg && (
                <Link href="/collection/kids" className="absolute inset-0">
                 <Image 
