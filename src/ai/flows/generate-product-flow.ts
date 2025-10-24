@@ -34,18 +34,18 @@ const prompt = ai.definePrompt({
   name: 'generateProductDetailsPrompt',
   input: { schema: GenerateProductDetailsInputSchema },
   output: { schema: GenerateProductDetailsOutputSchema },
-  prompt: `You are an expert e-commerce copywriter. Your task is to generate compelling product details for a new t-shirt based on its name and category.
+  prompt: `You are an expert e-commerce copywriter specializing in the Mexican market. Your task is to generate compelling product details for a new t-shirt in Mexican Spanish, based on its name and category.
 
   T-Shirt Name: {{{name}}}
   Category: {{{category}}}
 
-  Please generate the following:
+  Please generate the following in Mexican Spanish:
   - A short, catchy description (around 10 words).
   - A longer, detailed description for the product page (2-3 sentences).
-  - A suggested retail price (e.g., 29.99).
-  - A 2-3 word hint for an AI image generator (e.g., "geometric tshirt").
+  - A suggested retail price in a number format (e.g., 499.99). The currency is implicit.
+  - A 2-3 word hint for an AI image generator (e.g., "playera geometrica").
 
-  Provide the output in the requested JSON format.`,
+  Provide the output in the requested JSON format. Ensure all text content is in Mexican Spanish.`,
 });
 
 const generateProductDetailsFlow = ai.defineFlow(
