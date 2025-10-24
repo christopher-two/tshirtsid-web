@@ -23,7 +23,7 @@ export function WhatsAppButton({ product }: WhatsAppButtonProps) {
     setError(null);
     
     // IMPORTANTE: Reemplaza "1234567890" con tu número de WhatsApp real, incluyendo el código de país sin el "+".
-    const whatsappNumber = "1234567890";
+    const whatsappNumber = "6181137364";
     const productUrl = `${window.location.origin}/products/${product.id}`;
     
     const message = `Hola! Estoy interesado/a en la camiseta "${product.name}" en talla ${selectedSize}. ¿Podrían darme más información? \n\nEnlace al producto: ${productUrl}`;
