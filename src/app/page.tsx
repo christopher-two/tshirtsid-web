@@ -29,8 +29,8 @@ export default function Home() {
                   className="object-cover group-hover:opacity-75 transition-opacity" 
                   data-ai-hint={womanImg.imageHint} 
                 />
-                <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/70 to-transparent">
-                  <h2 className="text-5xl md:text-6xl font-black text-white uppercase">Mujer</h2>
+                <div className="absolute inset-0 flex items-end p-4 bg-gradient-to-t from-black/70 to-transparent">
+                  <h2 className="text-5xl md:text-6xl font-black text-white uppercase px-2">Mujer</h2>
                 </div>
               </Link>
             )}
@@ -45,8 +45,8 @@ export default function Home() {
                   className="object-cover group-hover:opacity-75 transition-opacity" 
                   data-ai-hint={manImg.imageHint}
                 />
-                <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/70 to-transparent">
-                  <h2 className="text-5xl md:text-6xl font-black text-white uppercase">Hombre</h2>
+                <div className="absolute inset-0 flex items-end p-4 bg-gradient-to-t from-black/70 to-transparent">
+                  <h2 className="text-5xl md:text-6xl font-black text-white uppercase px-2">Hombre</h2>
                 </div>
               </Link>
             )}
@@ -62,8 +62,8 @@ export default function Home() {
                   className="object-cover group-hover:opacity-75 transition-opacity" 
                   data-ai-hint={kidsImg.imageHint}
                 />
-                <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/70 to-transparent">
-                  <h2 className="text-5xl md:text-6xl font-black text-white uppercase">Kids</h2>
+                <div className="absolute inset-0 flex items-end p-4 bg-gradient-to-t from-black/70 to-transparent">
+                  <h2 className="text-5xl md:text-6xl font-black text-white uppercase px-2">Kids</h2>
                 </div>
                </Link>
              )}
