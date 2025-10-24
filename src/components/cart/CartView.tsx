@@ -6,16 +6,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingBag } from "lucide-react";
-import { createCheckoutSession } from "@/app/actions/stripe";
-import { getStripe } from "@/lib/stripe-client";
-import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
+import { MessageCircle, ShoppingBag } from "lucide-react";
 
 export function CartView() {
-  const { cartItems } = useCart();
-  const { toast } = useToast();
-  const router = useRouter();
+  const { cartItems, clearCart } = useCart();
 
   if (cartItems.length === 0) {
     return (
@@ -34,32 +28,26 @@ export function CartView() {
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const handleCheckout = async () => {
-    try {
-      const { sessionId } = await createCheckoutSession(cartItems);
-      const stripe = await getStripe();
-      if (!stripe) {
-        throw new Error("Stripe.js no se ha cargado.");
-      }
-      
-      const result = await stripe.redirectToCheckout({ sessionId });
-      
-      if (result.error) {
-        console.error("Error al redirigir a Stripe:", result.error);
-        toast({
-          title: "Error de Pago",
-          description: result.error.message || "Hubo un problema al redirigir a la página de pago.",
-          variant: "destructive",
-        });
-      }
-    } catch (err: any) {
-      console.error("Error al crear la sesión de checkout:", err);
-       toast({
-        title: "Error del Servidor",
-        description: err.message || "No se pudo iniciar el proceso de pago. Por favor, inténtalo de nuevo.",
-        variant: "destructive",
-      });
-    }
+  const handleWhatsAppOrder = () => {
+    // IMPORTANTE: Reemplaza con tu número de WhatsApp real, incluyendo el código de país sin el "+".
+    const whatsappNumber = "6181137364";
+    
+    const intro = "¡Hola! 👋 Me gustaría hacer un pedido con los siguientes artículos de mi carrito:\n\n";
+    
+    const itemsText = cartItems.map(item => 
+      `*Producto:* ${item.name}\n*Talla:* ${item.size}\n*Cantidad:* ${item.quantity}\n*Precio:* $${(item.price * item.quantity).toFixed(2)}`
+    ).join('\n\n');
+    
+    const totalText = `\n\n*Total estimado:* $${subtotal.toFixed(2)}`;
+    
+    const message = intro + itemsText + totalText;
+    
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
+    
+    // Opcional: limpiar el carrito después de enviar el pedido
+    // clearCart();
   };
 
   return (
@@ -81,7 +69,7 @@ export function CartView() {
             </div>
             <div className="flex justify-between">
               <span className="uppercase">Envío</span>
-              <span className="font-medium text-primary">Gratis</span>
+              <span className="font-medium text-primary">A convenir</span>
             </div>
             <Separator />
             <div className="flex justify-between font-bold text-lg">
@@ -90,7 +78,10 @@ export function CartView() {
             </div>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Button className="w-full uppercase font-bold" size="lg" onClick={handleCheckout}>Proceder al Pago</Button>
+            <Button className="w-full uppercase font-bold" size="lg" onClick={handleWhatsAppOrder}>
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Pedir por WhatsApp
+            </Button>
             <Button asChild variant="outline" className="w-full uppercase">
               <Link href="/">Seguir Comprando</Link>
             </Button>
