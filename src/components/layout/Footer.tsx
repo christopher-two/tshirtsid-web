@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, Facebook, Heart } from "lucide-react";
+import { Instagram, Heart } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 
@@ -36,11 +36,8 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <h2 className="text-2xl font-bold font-headline uppercase tracking-wider">T-Shirt ID</h2>
              <div className="flex space-x-4 mt-4">
-               <Link href="#" className="text-muted-foreground hover:text-primary">
+               <Link href="https://www.instagram.com/shirt4595/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
                  <Instagram className="w-5 h-5" />
-               </Link>
-               <Link href="#" className="text-muted-foreground hover:text-primary">
-                 <Facebook className="w-5 h-5" />
                </Link>
             </div>
           </div>
