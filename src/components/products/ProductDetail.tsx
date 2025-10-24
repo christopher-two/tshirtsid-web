@@ -3,15 +3,13 @@
 import Image from 'next/image';
 import type { TShirt } from '@/lib/types';
 import { AddToCart } from './AddToCart';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 interface ProductDetailProps {
   product: TShirt;
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
-  const placeholder = PlaceHolderImages.find(p => p.id === product.imageId);
-  const imageUrl = placeholder?.imageUrl;
+  const imageUrl = product.imageUrl;
 
   return (
     <div className="space-y-8 p-4 md:p-0">
