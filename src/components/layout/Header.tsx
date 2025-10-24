@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useAuth, useUser } from '@/firebase';
 import { usePathname } from 'next/navigation';
 import { CartIcon } from '../cart/CartIcon';
+import { ThemeToggle } from './ThemeToggle';
 
 const navLinks = [
     { href: '/collection', label: 'Colección' },
@@ -51,6 +52,7 @@ export function Header() {
           </div>
 
           <div className="flex-1 flex justify-end items-center gap-2">
+            <ThemeToggle />
             <CartIcon />
             {user && (
                  <Button variant="ghost" size="icon" onClick={() => auth.signOut()}>
