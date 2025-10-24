@@ -10,6 +10,7 @@ import {
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { useAuth, useUser } from '@/firebase';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
     { href: '/collection', label: 'Colección' },
@@ -19,6 +20,11 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useUser();
   const auth = useAuth();
+  const pathname = usePathname();
+
+  if (pathname.startsWith('/admin')) {
+      return null;
+  }
 
   return (
     <header className="bg-background border-b-2 border-foreground sticky top-0 z-40">

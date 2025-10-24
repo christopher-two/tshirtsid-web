@@ -1,7 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import { Twitter, Linkedin, Github, Heart } from "lucide-react";
+import { usePathname } from "next/navigation";
+
 
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith('/admin')) {
+      return null;
+  }
   const footerLinks = {
     Producto: [
       { title: "Visión General", href: "#" },

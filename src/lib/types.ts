@@ -8,11 +8,6 @@ export interface TShirt {
   imageId: string;
   imageHint: string;
   category: 'men' | 'women' | 'kids';
-}
-
-export interface Product extends TShirt {}
-
-export interface CartItem extends Product {
-  quantity: number;
-  size: string;
+  createdAt?: { seconds: number, nanoseconds: number };
+  updatedAt?: { seconds: number, nanoseconds: number };
 }
