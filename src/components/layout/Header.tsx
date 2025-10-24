@@ -5,6 +5,8 @@ import { Menu, MessageCircle, LogOut } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from '../ui/button';
@@ -69,6 +71,9 @@ export function Header() {
                         </Button>
                     </SheetTrigger>
                     <SheetContent side="right" className="bg-background">
+                         <SheetHeader>
+                            <SheetTitle className="sr-only">Menú de Navegación</SheetTitle>
+                         </SheetHeader>
                         <div className="flex flex-col gap-6 pt-10">
                             {navLinks.map((link) => (
                                 <Link key={link.href} href={link.href} className="text-lg font-medium uppercase tracking-widest hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>

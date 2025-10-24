@@ -18,7 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { AdminSidebar } from "./AdminSidebar";
 import { useAuth } from "@/firebase";
 
@@ -34,6 +34,9 @@ export function AdminMobileHeader() {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col p-0">
+            <SheetHeader>
+                <SheetTitle className="sr-only">Menú de Administración</SheetTitle>
+            </SheetHeader>
           <AdminSidebar className="block border-none" />
         </SheetContent>
       </Sheet>
