@@ -8,6 +8,8 @@ import { ProductDetail } from './ProductDetail';
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog"
 
 interface ProductViewProps {
@@ -99,7 +101,14 @@ export function ProductView({ allProducts }: ProductViewProps) {
 
       <Dialog open={!!selectedProduct} onOpenChange={(isOpen) => !isOpen && handleCloseDialog()}>
         <DialogContent className="max-w-4xl">
-          {selectedProduct && <ProductDetail product={selectedProduct} />}
+          {selectedProduct && (
+            <>
+                <DialogHeader>
+                    <DialogTitle className="sr-only">{selectedProduct.name}</DialogTitle>
+                </DialogHeader>
+                <ProductDetail product={selectedProduct} />
+            </>
+          )}
         </DialogContent>
       </Dialog>
     </div>
