@@ -49,9 +49,11 @@ export default function ProductPage() {
     );
   }
   
-  if (!product) {
+  if (!product && !isLoading) {
     notFound();
   }
+
+  if (!product) return null;
 
   return (
     <div className="space-y-8">
