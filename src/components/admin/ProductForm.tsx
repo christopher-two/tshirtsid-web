@@ -27,7 +27,9 @@ import {
 import { Sparkles } from 'lucide-react';
 import { generateProductDetails } from '@/ai/flows/generate-product-flow';
 import { useToast } from '@/hooks/use-toast';
+import { Checkbox } from "@/components/ui/checkbox"
 
+const ALL_SIZES = ["XS", "S", "M", "L", "XL", "XXL"] as const;
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -42,9 +44,9 @@ const formSchema = z.object({
   price: z.coerce.number().positive({
     message: 'El precio debe ser un número positivo.',
   }),
-  sizes: z.string().min(1, {
-    message: 'Debe haber al menos una talla.',
-  }).transform(val => val.split(',').map(s => s.trim().toUpperCase()).filter(Boolean)),
+  sizes: z.array(z.string()).refine(value => value.some(item => item), {
+    message: "Debes seleccionar al menos una talla.",
+  }),
   imageUrl: z.string().url({
     message: 'Por favor, introduce una URL de imagen válida.',
   }),
@@ -59,7 +61,7 @@ const formSchema = z.object({
 type ProductFormValues = z.infer<typeof formSchema>;
 
 interface ProductFormProps {
-  onSubmit: (data: ProductFormValues) => void;
+  onSubmit: (data: Omit<TShirt, 'id' | 'imageId'> & { sizes: string[] }) => void;
   initialData?: TShirt;
   isSubmitting?: boolean;
 }
@@ -86,7 +88,7 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
     if (initialData) {
       form.reset({
         ...initialData,
-        sizes: initialData.sizes.join(', '),
+        sizes: initialData.sizes || [],
       });
     }
   }, [initialData, form]);
@@ -198,20 +200,54 @@ export function ProductForm({ onSubmit, initialData, isSubmitting }: ProductForm
           )}
         />
         <FormField
-          control={form.control}
-          name="sizes"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Tallas</FormLabel>
-              <FormControl>
-                <Input placeholder="S, M, L, XL" {...field} />
-              </FormControl>
-              <FormDescription>
-                Separadas por comas.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+            control={form.control}
+            name="sizes"
+            render={() => (
+                <FormItem>
+                <div className="mb-4">
+                    <FormLabel>Tallas</FormLabel>
+                    <FormDescription>
+                    Selecciona las tallas disponibles para esta camiseta.
+                    </FormDescription>
+                </div>
+                <div className="flex flex-wrap gap-4">
+                    {ALL_SIZES.map((size) => (
+                    <FormField
+                        key={size}
+                        control={form.control}
+                        name="sizes"
+                        render={({ field }) => {
+                        return (
+                            <FormItem
+                            key={size}
+                            className="flex flex-row items-start space-x-3 space-y-0"
+                            >
+                            <FormControl>
+                                <Checkbox
+                                checked={field.value?.includes(size)}
+                                onCheckedChange={(checked) => {
+                                    return checked
+                                    ? field.onChange([...field.value, size])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                        (value) => value !== size
+                                        )
+                                    );
+                                }}
+                                />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                                {size}
+                            </FormLabel>
+                            </FormItem>
+                        );
+                        }}
+                    />
+                    ))}
+                </div>
+                <FormMessage />
+                </FormItem>
+            )}
         />
         <FormField
           control={form.control}

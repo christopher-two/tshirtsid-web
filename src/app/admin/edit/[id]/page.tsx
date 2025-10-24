@@ -26,7 +26,7 @@ export default function EditProductPage() {
 
   const { data: product, isLoading } = useDoc<TShirt>(productRef);
 
-  const handleEditProduct = async (data: Omit<TShirt, 'id'>) => {
+  const handleEditProduct = async (data: Omit<TShirt, 'id' | 'imageId'>) => {
     if (!firestore || !product) return;
     setIsSubmitting(true);
     
